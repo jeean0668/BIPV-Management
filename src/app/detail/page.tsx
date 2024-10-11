@@ -1,11 +1,11 @@
 // src/app/page.tsx
 "use client"
 
-import { MainPage } from "@/screens/main/page";
+import { DetailPage } from "@/screens/detail/page";
 
 export default function Home() {
 
   return (
-      <MainPage></MainPage>
+      <DetailPage></DetailPage>
   );
 }
