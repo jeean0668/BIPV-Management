@@ -1,6 +1,5 @@
 // src/store/actions/counterSlice.ts
 
-import { LayerControl } from '@/components/organisms/MapLayers/LayerControl';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LatLngTuple } from 'leaflet';
 import { act } from 'react';

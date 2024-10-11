@@ -80,7 +80,7 @@ const GisMapTemplateView = ({ title, initialPosition, tileURL, zoom, handleZoomI
       {/* 마커 정보 표시 drawer */}
       <MarkerDrawer title={'테스트 타이틀'} isDrawerOpen={isDrawerOpen} setDrawerOpen={setDrawerOpen}>
         { /* 체크리스트 항/목 표시 */}
-        <Label>해당 건물 ZEB 전환시 화재 안정성을 체크합니다...</Label>
+        <Label>{"해당 건물 ZEB 전환시 화재 안정성을 체크합니다..."}</Label>
         // 화재 안정성 체크리스트 제시, 계산후 색깔로 표현(위험, 보통, 낮음) 
         <Button type ="submit" >submit</Button>
       </MarkerDrawer>

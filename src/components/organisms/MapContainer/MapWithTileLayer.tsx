@@ -23,7 +23,7 @@ const MapWithTileLayer = ({ initialPosition, tileURL, children, zoom }: MapWithT
     zoom,
   }
 
-  let DefaultIcon = L.icon({
+  const DefaultIcon = L.icon({
     iconUrl: '/images/marker-icon.png',
     shadowUrl: '/images/marker-shadow.png',
   });

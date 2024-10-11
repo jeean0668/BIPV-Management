@@ -1,7 +1,7 @@
 import React from 'react'
-import { FormItem, FormControl, FormLabel, FormDescription} from '@/components/ui/atoms/form'
-import { Checkbox } from '@/components/ui/atoms/checkbox'
-import { Option } from '@/utils/types'
+import { FormItem, FormControl, FormLabel, FormDescription} from '@/components/ui/form'
+import { Checkbox } from '@/components/ui/checkbox'
+// import { Option } from '@/utils/types'
 import Link from 'next/link'
 
 interface CheckBoxWithTitleProps {
