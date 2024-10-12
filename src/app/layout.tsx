@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <MdMenu size={28} onClick={() => setIsMenuOpen(!isMenuOpen)} />
               </div> */}
       
-              <LeftSidebar></LeftSidebar>
+              {/* <LeftSidebar></LeftSidebar> */}
             {children}
           </div>
         </Providers>
