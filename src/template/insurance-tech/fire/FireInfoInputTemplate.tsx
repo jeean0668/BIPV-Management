@@ -24,18 +24,17 @@ export const FireInfoInputTemplate = () => {
   const {
     form,
     handleAddressSearch,
-    onSubmit,
     population,
-    position, 
-    tileURL, 
     density, 
     rippleEffect,
-    RecenterAutomatically, 
     rippleEffectColor,
     rippleEffectMessage, 
     isLoading, 
     handleSubmit, 
     isCalculationFinished,
+    position,
+    tileURL, 
+    RecenterAutomatically
 
   } = useFireInfoInputTemplate();
 
@@ -70,12 +69,12 @@ export const FireInfoInputTemplate = () => {
           </div>
 
           {/* 작성한 위치 지도상으로 보여주는 부분 */}
-          {/* <div className="w-full h-[300px] border-2 mt-2">
+          <div className="w-full h-[300px] border-2 mt-2">
             <DynamicMap initialPosition={[position.lat, position.lng]} tileURL={tileURL} zoom={13}>
               <Marker position={[position.lat, position.lng]} />
               <RecenterAutomatically lat={position.lat} lng={position.lng} />
             </DynamicMap>
-          </div> */}
+          </div>
 
           <CardWithDetailDescription
             title={"상세한 정보를 보여드릴게요"} 
