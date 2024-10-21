@@ -1,6 +1,8 @@
 
 import React from 'react'
-import { AirRiskPage } from '@/screens/docs/air/page'
+import dynamic from 'next/dynamic'
+
+const AirRiskPage = dynamic(() => import('@/screens/docs/air/page'), {ssr : false}); 
 const DocPage = () => {
   return (
     <AirRiskPage></AirRiskPage>

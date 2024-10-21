@@ -32,7 +32,7 @@ export const SelectForm = ({name, form, infoList, onSubmit} : SelectFormProps) =
                               <SelectValue placeholder={form.getValues(name)}/>
                             </SelectTrigger>
                             <SelectContent>
-                                {infoList && infoList.map((info : any) => (<SelectItem value={info.name}>{info.name}</SelectItem>))}
+                                {infoList && infoList.map((info : any, index : number) => (<SelectItem key={`id-${name}-${index}`} value={info.name}>{info.name}</SelectItem>))}
                             </SelectContent>
                         </FormControl>
                     </FormItem>

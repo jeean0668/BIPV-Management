@@ -40,7 +40,6 @@ export const parseBuildingData = (gisData: string): BuildingData[] => {
     const geometry = feature.geometry;
     const properties: BuildingProperties = feature.properties;
     let position: LatLngPos;
-    let area = 0; // 다각형 면적 초기화
     console.log(`plot_ar : ${properties.plot_ar}, ar : ${properties.ar}`);
     if (properties.plot_ar == 0 && properties.ar > 0){
       // 건축면적이 대지면적 0이고 건축면적이 0보다 큰 데이터는 건축면적의 1.2배로 적용
