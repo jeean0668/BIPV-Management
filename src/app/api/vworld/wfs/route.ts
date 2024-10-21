@@ -13,15 +13,19 @@ export async function GET(req: Request) {
   const srsName = 'EPSG:4326'
   const output = 'application/json'
 
+  console.log(key);
+  console.log(domain)
   const apiUrl = new URL(`https://api.vworld.kr/ned/wfs/getBldgisSpceWFS?typename=dt_d010&bbox=${bbox}&srsName=${srsName}&output=${output}&maxFeatures=${maxFeatures}&key=${key}&domain=${domain}`)
+  // const apiUrl = new URL(`https://api.vworld.kr/ned/wfs/getBldgisSpceWFS?typename=dt_d010&bbox=${bbox}&srsName=${srsName}&output=${output}&maxFeatures=${maxFeatures}&key=${key}`)
 
   const res = await fetch(apiUrl,
     {
       method : 'GET',
     }
   )
-  const data = await res.text()
 
+  const data = await res.text()
+  console.log(data);
   // 의심되는 위치 
   const parsedData = JSON.parse(data); 
   

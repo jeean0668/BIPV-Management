@@ -9,10 +9,11 @@ interface InputFieldProps {
     id : string, 
     form : UseFormReturn<any>
     label : string
-    description : string
+    description? : string
+    disabled? : true
 }
 
-export const InputField = ({id, form, label, description} : InputFieldProps) => {
+export const InputField = ({id, form, label, description, disabled} : InputFieldProps) => {
   return (
     <FormField
             control={form.control}
@@ -21,11 +22,14 @@ export const InputField = ({id, form, label, description} : InputFieldProps) => 
               <FormItem>
                 <FormLabel>{label}</FormLabel>
                 <FormControl>
-                  <Input placeholder="건영빌딩" {...field} />
+                  {disabled ? <Input disabled placeholder="건영빌딩" {...field}/> : <Input placeholder="건영빌딩" {...field} />}
+                  {/* <Input placeholder="건영빌딩" {...field} /> */}
                 </FormControl>
-                <FormDescription>
-                  {description}
-                </FormDescription>
+                {description &&
+                  <FormDescription>
+                    {description}
+                  </FormDescription>
+                }
                 <FormMessage />
               </FormItem>
             )}
