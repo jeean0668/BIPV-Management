@@ -65,3 +65,36 @@ export const parseBuildingData = (gisData: string): BuildingData[] => {
   console.log(`building length : ${buildings.length}`);
   return buildings;
 };
+
+// 용도별 빌딩 분류
+export const buildingPurposeCodes: { [key: string]: { name: string; color: string, count:number } } = {
+  '01000': { name: '단독주택', color: '#e6194b', count:0 },           // Red
+  '02000': { name: '공동주택', color: '#3cb44b', count:0 },           // Green
+  '03000': { name: '제1종근린생활시설', color: '#ffe119', count:0   },   // Yellow
+  '04000': { name: '제2종근린생활시설', color: '#4363d8', count:0  },   // Blue
+  '05000': { name: '문화및집회시설', color: '#f58231', count:0  },     // Orange
+  '06000': { name: '종교시설', color: '#911eb4', count:0  },           // Purple
+  '07000': { name: '판매시설', color: '#46f0f0', count:0  },           // Cyan
+  '08000': { name: '운수시설', color: '#f032e6', count:0  },           // Magenta
+  '09000': { name: '의료시설', color: '#bcf60c', count:0  },           // Lime
+  '10000': { name: '교육연구시설', color: '#fabebe', count:0  },       // Pink
+  '11000': { name: '노유자시설', color: '#008080', count:0  },         // Teal
+  '12000': { name: '수련시설', color: '#e6beff', count:0  },           // Lavender
+  '13000': { name: '운동시설', color: '#9a6324', count:0  },           // Brown
+  '14000': { name: '업무시설', color: '#fffac8', count:0  },           // Beige
+  '15000': { name: '숙박시설', color: '#800000', count:0  },           // Maroon
+  '16000': { name: '위락시설', color: '#aaffc3', count:0  },           // Mint
+  '17000': { name: '공장', color: '#808000', count:0  },               // Olive
+  '18000': { name: '창고시설', color: '#ffd8b1', count:0  },           // Peach
+  '19000': { name: '위험물저장및처리시설', color: '#000075', count:0  }, // Navy
+  '20000': { name: '자동차관련시설', color: '#808080', count:0  },     // Grey
+  '21000': { name: '동식물관련시설', color: '#ffffff', count:0  },     // White
+  '22000': { name: '분뇨,쓰레기처리시설', color: '#000000', count:0  }, // Black
+  '23000': { name: '교정및군사시설', color: '#ffe4e1', count:0  },     // Misty Rose
+  '24000': { name: '방송통신시설', color: '#4682b4', count:0  },       // Steel Blue
+  '25000': { name: '발전시설', color: '#d2691e', count:0  },           // Chocolate
+  '26000': { name: '묘지관련시설', color: '#bdb76b', count:0  },       // Dark Khaki
+  '27000': { name: '관광휴게시설', color: '#ff1493', count:0  },       // Deep Pink
+  '28000': { name: '가설건축물', color: '#7fff00', count:0  },         // Chartreuse
+  '29000': { name: '장례식장', color: '#dc143c', count:0  },           // Crimson
+};

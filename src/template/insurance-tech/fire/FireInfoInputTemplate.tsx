@@ -17,6 +17,7 @@ import "leaflet/dist/leaflet.css";
 import { DynamicMap } from '@/template/gis/DynamicMap';
 import { CardWithDetailDescription } from '@/components/organisms/card/card-detail_description'
 import {Spinner} from "@nextui-org/spinner";
+import Image from "next/image";
 
 export const FireInfoInputTemplate = () => {
   
@@ -45,9 +46,9 @@ export const FireInfoInputTemplate = () => {
       
       {/* 계산 완료 전 로딩 중인 상태 */}
       {isLoading && (
-        <div className="flex items-center justify-center h-64">
-          <Spinner color="primary"/>
-          <p>로딩중입니다.</p> {/* 로딩 메시지 또는 로딩 스피너 추가 가능 */}
+        <div className="flex flex-col items-center justify-center h-64">
+          <Image src={"/images/loading.gif"} alt="loading animation" height={50} width={50}/>
+          <p>계산중입니다...</p> {/* 로딩 메시지 또는 로딩 스피너 추가 가능 */}
         </div>
       )}
 

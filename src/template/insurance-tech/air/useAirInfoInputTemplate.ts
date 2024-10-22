@@ -12,7 +12,7 @@ import { setAddress, setPopulation, setPosition, setBcode, setBuildingData } fro
 import { fetchLatLngFromAddress } from '@/utils/fetch/googlemap/fetchLocation'
 import { getCircleBounds } from '@/utils/gis/mapUtils'
 import { fetchBuildingData } from '@/utils/fetch/vworld/fetchBuildingData'
-import { parseBuildingData } from '@/utils/gis/buildingUtils'
+import { buildingPurposeCodes, parseBuildingData } from '@/utils/gis/buildingUtils'
 import { useEffect, useState } from 'react'
 import { useMap } from 'react-leaflet'
 
@@ -56,6 +56,9 @@ export function useAirInfoInputTemplate() {
   const [rippleEffect, setRippleEffect] = useState<number>(0);
   const [rippleEffectMessage, setRippleEffectMessage] = useState<string>("건물이 선택되지 않았어요.");
   const [rippleEffectColor, setRippleEffectColor] = useState<string>("bg-red-300");
+  const [buildPropos, setBuildPropos] = useState<{[key: string]: { name: string; color: string, count:number }}>(buildingPurposeCodes);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCalculationFinished, setIsCalculationFinished] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -80,6 +83,23 @@ export function useAirInfoInputTemplate() {
       },
     }).open();
   }
+
+  // 제출 버튼 클릭 시 로딩 상태로 전환
+  const handleSubmit = async (data: any) => {
+    setIsLoading(true); // 로딩 시작
+    const startTime = Date.now();
+
+    await onSubmit(data); // 실제 제출 작업
+
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = 3000 - elapsedTime;
+
+    // 최소 2초 동안 로딩 화면을 유지하고 계산 완료 후 결과 화면만 표시
+    setTimeout(() => {
+      setIsLoading(false); // 로딩 종료
+      setIsCalculationFinished(true); // 계산 완료 상태로 전환
+    }, remainingTime > 0 ? remainingTime : 0);
+  };
 
   // ripple Effect에 따른 color 선택 함수.
   const selectRippleEffectColor = (effect : number) => {
@@ -182,6 +202,9 @@ export function useAirInfoInputTemplate() {
     setRippleEffect((density + 0.15) * population);
     // rippleEffect에 따른 색깔 변경
     selectRippleEffectColor(effect * 100 / 5000)
+
+    // 용도별 건물 분류 데이터 세팅 
+    setBuildPropos(classifyBuildingUsage(buildingData));
   },
 
   [buildingData]);
@@ -237,7 +260,32 @@ export function useAirInfoInputTemplate() {
 
   }, [density])
   
+ // buildingData의 용도별로 분류하여 카운트를 증가시키는 함수
+const classifyBuildingUsage = (buildingData: any[]) => {
+  // buildingPurposeCodes 초기화 (이후 카운트 값을 누적하기 때문에 원본을 수정하지 않도록 별도의 객체를 생성)
 
+  setBuildPropos(buildingPurposeCodes); 
+  const usageCounts = { ...buildingPurposeCodes };
+
+  console.log(`usageCounts : ${usageCounts}`);
+  // 1. buildingData의 buld_prpos_code 데이터를 검색.
+  for (const building of buildingData) {
+    const buildingCode = String(building.properties.buld_prpos_code); // 건물 용도 코드
+
+    // 2. buildingCodes에서 해당 코드가 존재하는지 확인
+    if (buildingCode && usageCounts[buildingCode]) {
+      // 3. 해당 용도 코드의 카운트를 증가
+      usageCounts[buildingCode].count += 1;
+      console.log(`building Code : ${buildingCode}, count : ${usageCounts[buildingCode].count}`)
+    } else {
+      console.warn(`Unknown building purpose code: ${buildingCode}`);
+    }
+  }
+
+  // 결과를 반환하거나 원하는 방식으로 처리 가능
+  return usageCounts;
+};
+  
   // {lat, lng} 포지션으로 맵을 이동시킵니다.
   const RecenterAutomatically = ({lat, lng} : any) => {
     const map = useMap();
@@ -263,5 +311,9 @@ export function useAirInfoInputTemplate() {
     RecenterAutomatically, 
     rippleEffectColor,
     rippleEffectMessage, 
+    buildPropos,
+    isLoading,
+    isCalculationFinished, 
+    handleSubmit, 
   }
 }
